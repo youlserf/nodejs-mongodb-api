@@ -1,48 +1,48 @@
 const express = require("express");
-const userSchema = require("../models/user");
+const productoSchema = require("../models/producto");
 
 const router = express.Router();
 
-// create user
-router.post("/users", (req, res) => {
-  const user = userSchema(req.body);
-  user
+// create producto
+router.post("/productos", (req, res) => {
+  const producto = productoSchema(req.body);
+  producto
     .save()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-// get all users
-router.get("/users", (req, res) => {
-  userSchema
+// get all productos
+router.get("/productos", (req, res) => {
+  productoSchema
     .find()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-// get a user
-router.get("/users/:id", (req, res) => {
+// get a producto
+router.get("/productos/:id", (req, res) => {
   const { id } = req.params;
-  userSchema
+  productoSchema
     .findById(id)
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-// delete a user
-router.delete("/users/:id", (req, res) => {
+// delete a producto
+router.delete("/productos/:id", (req, res) => {
   const { id } = req.params;
-  userSchema
+  productoSchema
     .remove({ _id: id })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
 
-// update a user
-router.put("/users/:id", (req, res) => {
+// update a producto
+router.put("/productos/:id", (req, res) => {
   const { id } = req.params;
   const { name, age, email } = req.body;
-  userSchema
+  productoSchema
     .updateOne({ _id: id }, { $set: { name, age, email } })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
